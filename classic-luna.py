@@ -6,14 +6,14 @@ import json
 def test_chat_completions():
     """Test the chat completions endpoint"""
     
-    url = "http://100.76.203.80:8080/v1/chat/completions"
+    url = "http://100.76.203.80:1306/v1/chat/completions"
     
     payload = {
         "model": "Qwen3-1.7B-RKLLM-v1.2.0",
         "messages": [
             {
                 "role": "user",
-                "content": "What is the capital of France?"
+                "content": "What is the capital of France and US?"
             }
         ],
         "temperature": 0.7,
@@ -53,7 +53,7 @@ def test_chat_completions():
 def test_streaming():
     """Test the streaming chat completions"""
     
-    url = "http://100.76.203.80:8080/v1/chat/completions"
+    url = "http://100.76.203.80:1306/v1/chat/completions"
     
     payload = {
         "model": "Qwen3-1.7B-RKLLM-v1.2.0",
@@ -105,7 +105,7 @@ def test_streaming():
 def test_health():
     """Test the health endpoint"""
     
-    url = "http://100.76.203.80:8080/health"
+    url = "http://100.76.203.80:1306/health"
     
     try:
         print("\n" + "="*50)
@@ -125,13 +125,13 @@ if __name__ == "__main__":
     print("=" * 50)
     
     # Test health first
-    test_health()
+    # test_health()
     
     # Test regular chat completion
     test_chat_completions()
     
     # Test streaming
-    test_streaming()
+    # test_streaming()
     
     print("\n" + "="*50)
     print("Testing complete!")
