@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="left-column">
+            <!-- Flight Search Form -->
+            <div class="card flight-search">
+                <div class="input-group">
+                    <label>From</label>
+                    <input type="text" value="New York" id="from">
+                    <button class="swap-btn" id="swapBtn">⇅</button>
+                </div>
+                <div class="input-group">
+                    <label>To</label>
+                    <input type="text" value="Abu Dhabi" id="to">
+                </div>
+                <div class="input-group">
+                    <label>Departure date</label>
+                    <input type="date" value="2024-04-29">
+                </div>
+                <div class="input-group">
+                    <label>Return date</label>
+                    <input type="date" value="2024-05-02">
+                    <button class="remove-btn">Remove</button>
+                </div>
+                <div class="input-group">
+                    <label>Passenger</label>
+                    <input type="text" value="2 Adults - 1 Child" readonly>
+                </div>
+                <button class="search-btn">Search Flights</button>
+            </div>
+
+            <!-- Flight Details -->
+            <div class="card flight-details">
+                <div class="time-info">
+                    <span class="time">14:15</span>
+                    <div class="flight-path">
+                        <span class="direct">Direct</span>
+                        <div class="path-line"></div>
+                        <span class="duration">1h 23m</span>
+                    </div>
+                    <span class="time">01:32</span>
+                </div>
+            </div>
+
+            <!-- World Map -->
+            <div class="card world-map">
+                <div class="map-container">
+                    <div class="airport-info">
+                        <div class="airport left">
+                            <span class="code">JFK</span>
+                            <span class="name">John F. Kennedy International Airport</span>
+                        </div>
+                        <div class="airport right">
+                            <span class="code">AUH</span>
+                            <span class="name">Zayed International Airport</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="middle-column">
+            <!-- Notification -->
+            <div class="notification">
+                <div class="notification-icon">🔔</div>
+                <div class="notification-content">
+                    <h3>Don't missed your flight</h3>
+                    <p>Hi Jonathan, You have flight today at 07:15 PM. Better to go early to avoid road traffic.</p>
+                    <button class="okay-btn">Okay, I Understand</button>
+                </div>
+            </div>
+
+            <!-- Boarding Pass -->
+            <div class="card boarding-pass">
+                <div class="flight-info">
+                    <div class="flight-date">
+                        <span class="date-label">Flight Date</span>
+                        <span class="date">April 29, 2024 • 02:15 PM</span>
+                    </div>
+                    <div class="route">
+                        <span class="from">AMS</span>
+                        <span class="arrow">✈</span>
+                        <span class="to">CGK</span>
+                    </div>
+                    <div class="airport-names">
+                        <span>Amsterdam Airport Schiphol</span>
+                        <span>Soekarno Hatta International Airport</span>
+                    </div>
+                </div>
+                <div class="passengers">
+                    <div class="passenger">
+                        <span class="name">Mr. Jonathan Wise</span>
+                        <span class="type">Adult</span>
+                        <span class="baggage">Baggage 20kg</span>
+                    </div>
+                    <div class="passenger">
+                        <span class="name">Mrs. Samantha William</span>
+                        <span class="type">Adult</span>
+                        <span class="baggage">Baggage 20kg</span>
+                    </div>
+                    <div class="passenger">
+                        <span class="name">Ms. Karen Summer</span>
+                        <span class="type">Child</span>
+                        <span class="baggage">Baggage 20kg</span>
+                    </div>
+                </div>
+                <div class="barcode"></div>
+            </div>
+
+            <!-- Facilities -->
+            <div class="card facilities">
+                <h3>Select Facilities</h3>
+                <div class="facilities-grid">
+                    <label><input type="checkbox" checked> Baggage</label>
+                    <label><input type="checkbox" checked> In-flight meal</label>
+                    <label><input type="checkbox"> Wifi</label>
+                    <label><input type="checkbox"> USB Port</label>
+                    <label><input type="checkbox" checked> Television</label>
+                    <label><input type="checkbox"> Headset</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-column">
+            <!-- Price Range -->
+            <div class="card price-range">
+                <h3>Price Range</h3>
+                <div class="price-slider">
+                    <input type="range" min="320" max="2400" value="320" id="minPrice">
+                    <input type="range" min="320" max="2400" value="2400" id="maxPrice">
+                </div>
+                <div class="price-labels">
+                    <span>Minimum Price<br>$320</span>
+                    <span>Maximum Price<br>$2400</span>
+                </div>
+                <button class="apply-filter">Apply Filter</button>
+            </div>
+
+            <!-- Passengers -->
+            <div class="card passengers">
+                <h3>Select Passengers</h3>
+                <div class="passenger-controls">
+                    <div class="passenger-type">
+                        <div>
+                            <span>Adult</span>
+                            <span class="age-info">Above 12 years old</span>
+                        </div>
+                        <div class="counter">
+                            <button class="minus">-</button>
+                            <span class="count">2</span>
+                            <button class="plus">+</button>
+                        </div>
+                    </div>
+                    <div class="passenger-type">
+                        <div>
+                            <span>Children</span>
+                            <span class="age-info">Below 12 years old</span>
+                        </div>
+                        <div class="counter">
+                            <button class="minus">-</button>
+                            <span class="count">1</span>
+                            <button class="plus">+</button>
+                        </div>
+                    </div>
+                    <div class="passenger-type">
+                        <div>
+                            <span>Infants</span>
+                            <span class="age-info">Below 2 years old</span>
+                        </div>
+                        <div class="counter">
+                            <button class="minus">-</button>
+                            <span class="count">0</span>
+                            <button class="plus">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seat Selection -->
+            <div class="card seat-selection">
+                <h3>Select Seats</h3>
+                <div class="seat-map">
+                    <div class="seat-row">
+                        <div class="seat">B1</div>
+                        <div class="seat">C1</div>
+                        <div class="seat selected">D1</div>
+                        <div class="seat highlighted">E1</div>
+                    </div>
+                    <div class="seat-row">
+                        <div class="seat">B2</div>
+                        <div class="seat highlighted">C2</div>
+                        <div class="seat">D2</div>
+                        <div class="seat">E2</div>
+                    </div>
+                    <div class="seat-row">
+                        <div class="seat">B3</div>
+                        <div class="seat">C3</div>
+                        <div class="seat">D3</div>
+                        <div class="seat">E3</div>
+                    </div>
+                </div>
+                <div class="seat-legend">
+                    <span class="available">Available</span>
+                    <span class="unavailable">Unavailable</span>
+                </div>
+                <button class="select-seat-btn">Select Seat</button>
+            </div>
+
+            <!-- Payment -->
+            <div class="card payment">
+                <h3>Payment</h3>
+                <p>Provide your payment method</p>
+                <div class="card-input">
+                    <label>Card number</label>
+                    <input type="text" value="8988 1234 0987 7654">
+                </div>
+                <div class="card-details">
+                    <div class="expiry">
+                        <label>Expiry Date</label>
+                        <input type="text" value="12/24">
+                    </div>
+                    <div class="cvv">
+                        <label>CVV</label>
+                        <input type="text" value="123">
+                    </div>
+                </div>
+                <button class="process-payment">Process Payment</button>
+            </div>
+
+            <!-- Destination -->
+            <div class="card destination">
+                <h3>Destination</h3>
+                <select>
+                    <option>Switzerland</option>
+                    <option>Basel, Switzerland</option>
+                    <option>Geneva, Switzerland</option>
+                    <option>Zurich, Switzerland</option>
+                </select>
+                <div class="destination-options">
+                    <div class="destination-item">Basel, Switzerland<br><span>BSL - Euro Airport</span></div>
+                    <div class="destination-item">Geneva, Switzerland<br><span>GVA - Geneva Airport</span></div>
+                    <div class="destination-item">Zurich, Switzerland<br><span>ZUR - Zurich Airport</span></div>
+                </div>
+            </div>
+
+            <!-- Additional Baggage -->
+            <div class="card additional-baggage">
+                <h3>Additional Baggage</h3>
+                <div class="baggage-options">
+                    <div class="baggage-option">
+                        <span>🎒 5 kg</span>
+                        <span>$20</span>
+                        <input type="radio" name="baggage">
+                    </div>
+                    <div class="baggage-option selected">
+                        <span>🧳 10 kg</span>
+                        <span>$25</span>
+                        <input type="radio" name="baggage" checked>
+                    </div>
+                    <div class="baggage-option">
+                        <span>🧳 15 kg</span>
+                        <span>$30</span>
+                        <input type="radio" name="baggage">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

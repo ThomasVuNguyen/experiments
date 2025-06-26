@@ -1,0 +1,228 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.announcement-bar {
+    background-color: #e9ecef;
+    text-align: center;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: #666;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background-color: white;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.nav-link:hover {
+    color: #333;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 1px solid #ddd;
+    color: #666;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #333;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #f8f9fa;
+}
+
+.btn-primary:hover {
+    background: #555;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.hero {
+    padding: 80px 0;
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.hero-title {
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 32px;
+    color: #333;
+}
+
+.hero-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 48px;
+    line-height: 1.6;
+}
+
+.cta-button {
+    background: transparent;
+    border: 2px solid #333;
+    color: #333;
+    padding: 16px 32px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+    background: #333;
+    color: white;
+}
+
+.hero-illustration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.engine-diagram {
+    width: 400px;
+    height: 300px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><circle cx="200" cy="150" r="80" fill="none" stroke="%23333" stroke-width="2"/><path d="M120 150 L280 150 M200 70 L200 230" stroke="%23333" stroke-width="1"/><circle cx="200" cy="150" r="40" fill="none" stroke="%23333" stroke-width="2"/></svg>') no-repeat center;
+    background-size: contain;
+}
+
+.testimonials {
+    padding: 80px 0;
+    border-top: 1px solid #eee;
+}
+
+.testimonials-heading {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 48px;
+}
+
+.testimonials-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.company-logos {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+}
+
+.hermeus::after {
+    content: "🚀";
+    margin-left: 8px;
+    font-size: 20px;
+}
+
+.testimonial-text {
+    background: white;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.testimonial-text p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+
+.testimonial-author {
+    font-size: 14px;
+    color: #666;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        text-align: center;
+    }
+    
+    .hero-title {
+        font-size: 48px;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        gap: 16px;
+    }
+    
+    .testimonials-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+    
+    .company-logos {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
