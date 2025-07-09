@@ -1,0 +1,22 @@
+{
+  "name": "minimal_view",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@azure/msal-node": "^3.6.3",
+    "@google/generative-ai": "^0.24.1",
+    "@microsoft/microsoft-graph-client": "^3.0.7",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "mailparser": "^3.7.4",
+    "node-imap": "^0.9.6"
+  }
+}
