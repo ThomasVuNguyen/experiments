@@ -1,0 +1,2141 @@
+
+
+--- Content from https://flyer.chat/docs/flutter/introduction/ ---
+
+Introduction
+Ship faster with a go-to chat SDK for Flutter.
+Flyer Chat is an open-source chat UI package for Flutter applications, designed for performance, customization, and ease of integration.
+Features ✨
+Section titled “Features ✨”
+🔄
+Backend-agnostic
+: Connect to any backend service.
+🧬
+Adaptable
+: Perfect for real-time messengers, generative AI agents and LLM-based assistants, support platforms, and beyond.
+🎨
+Highly Customizable
+: Tailor the UI with extensive theme options and builder functions.
+🧩
+Modular
+: Pick and choose the features you want. You can change any part of the UI or swap it with your own custom implementation.
+⚡
+Performance Optimized
+: Built for speed and smooth animations.
+🌐
+Cross-Platform
+: Supports iOS, Android, Web, macOS, Windows, and Linux.
+📜
+Open Source
+: Free to use under the Apache 2.0 License.
+Motivation ⏫
+Section titled “Motivation ⏫”
+Building a chat UI should be simple. It might seem like just adding an input field and some message bubbles. But handling things like smooth animations, various message formats, and support for different platforms quickly becomes complex. Flyer Chat provides a strong base for creating any chat interface you imagine, whether it’s for messaging apps, AI assistants, customer support, or something else. We wanted to create a chat UI that feels high-quality, with excellent performance and delightful animations - something often hard to achieve from scratch.
+Edit page
+Last updated:
+Jul 15, 2025
+Next
+Simple Example
+
+--- Content from https://flyer.chat/ ---
+
+docs
+D
+blog
+B
+contact
+C
+github
+Ship faster with a go‑to chat SDK.
+Free and open-source chat SDK for Flutter and React Native. Build fast,
+        real-time apps and AI agents with a high-performance, customizable,
+        cross-platform UI.
+Start building
+S
+Flutter
+Loading...
+React Native
+Loading...
+Start building chats today.
+Start building
+S
+Contact us
+C
+2025, FLYER LABS LTD
+Contact us
+
+--- Content from https://flyer.chat/docs/flutter/introduction ---
+
+Introduction
+Ship faster with a go-to chat SDK for Flutter.
+Flyer Chat is an open-source chat UI package for Flutter applications, designed for performance, customization, and ease of integration.
+Features ✨
+Section titled “Features ✨”
+🔄
+Backend-agnostic
+: Connect to any backend service.
+🧬
+Adaptable
+: Perfect for real-time messengers, generative AI agents and LLM-based assistants, support platforms, and beyond.
+🎨
+Highly Customizable
+: Tailor the UI with extensive theme options and builder functions.
+🧩
+Modular
+: Pick and choose the features you want. You can change any part of the UI or swap it with your own custom implementation.
+⚡
+Performance Optimized
+: Built for speed and smooth animations.
+🌐
+Cross-Platform
+: Supports iOS, Android, Web, macOS, Windows, and Linux.
+📜
+Open Source
+: Free to use under the Apache 2.0 License.
+Motivation ⏫
+Section titled “Motivation ⏫”
+Building a chat UI should be simple. It might seem like just adding an input field and some message bubbles. But handling things like smooth animations, various message formats, and support for different platforms quickly becomes complex. Flyer Chat provides a strong base for creating any chat interface you imagine, whether it’s for messaging apps, AI assistants, customer support, or something else. We wanted to create a chat UI that feels high-quality, with excellent performance and delightful animations - something often hard to achieve from scratch.
+Edit page
+Last updated:
+Jul 15, 2025
+Next
+Simple Example
+
+--- Content from https://flyer.chat/docs/react-native/wip/ ---
+
+Work in Progress
+🚧 The React Native documentation is currently in progress. 🚧
+Edit page
+Last updated:
+Jul 15, 2025
+
+--- Content from https://flyer.chat/docs/flutter/getting-started/simple-example/ ---
+
+Simple Example 📝
+This section demonstrates the simplest possible setup for Flyer Chat using the core
+Chat
+widget. To get started, you need to provide three essential parameters:
+chatController
+: This manages the messages displayed in the chat. For this basic example, we’ll use the provided
+InMemoryChatController
+.
+InMemoryChatController
+is easy to use but it
+does not save messages
+when the app closes or restarts.
+For persistent storage across sessions, you would create your own controller implementation (see the
+Architecture
+section or the example project for details).
+currentUserId
+(
+UserID
+)
+: The ID of the currently logged-in user (who will be the author of messages sent via the composer).
+resolveUser
+(
+Future<User> Function(UserID id)
+)
+: An asynchronous function that takes a user ID and must return the corresponding
+User
+object. Flyer Chat uses user IDs internally and calls this function whenever it needs the full user data (e.g., for displaying name or avatar), caching the results in memory.
+The following code snippet shows how to combine these elements for a minimal, functioning chat interface.
+import
+'dart:math'
+;
+import
+'package:flutter/material.dart'
+;
+import
+'package:flutter_chat_core/flutter_chat_core.dart'
+;
+import
+'package:flutter_chat_ui/flutter_chat_ui.dart'
+;
+class
+MyChat
+extends
+StatefulWidget
+{
+const
+MyChat
+({
+super
+.
+key})
+;
+@override
+MyChatState
+createState
+()
+=>
+MyChatState
+()
+;
+}
+class
+MyChatState
+extends
+State
+<
+MyChat
+> {
+final
+_chatController
+=
+InMemoryChatController
+()
+;
+@override
+void
+dispose
+() {
+_chatController
+.
+dispose
+()
+;
+super
+.
+dispose
+()
+;
+}
+@override
+Widget
+build
+(
+BuildContext
+context) {
+return
+Scaffold
+(
+body
+:
+Chat
+(
+chatController
+:
+_chatController
+,
+currentUserId
+:
+'user1'
+,
+onMessageSend
+:
+(text) {
+_chatController
+.
+insertMessage
+(
+TextMessage
+(
+// Better to use UUID or similar for the ID - IDs must be unique.
+id
+:
+'
+${
+Random
+().
+nextInt
+(
+1000
+) +
+1
+}
+'
+,
+authorId
+:
+'user1'
+,
+createdAt
+:
+DateTime
+.
+now
+()
+.
+toUtc
+()
+,
+text
+:
+text
+,
+)
+,
+)
+;
+}
+,
+resolveUser
+:
+(
+UserID
+id)
+async
+{
+return
+User
+(id
+:
+id
+,
+firstName
+:
+'John'
+,
+lastName
+:
+'Doe'
+)
+;
+}
+,
+)
+,
+)
+;
+}
+}
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Introduction
+Next
+Flyer Chat Architecture
+
+--- Content from https://flyer.chat/docs/flutter/getting-started/architecture/ ---
+
+Flyer Chat Architecture 🏗️
+Flyer Chat is built with two core packages:
+flutter_chat_ui
+: The main package you’ll use for the chat interface. It’s kept simple with few dependencies for better performance.
+flutter_chat_core
+: Contains shared models and helper functions used by all Flyer Chat packages.
+We also offer extra packages for common message types, like
+flyer_chat_text_message
+,
+flyer_chat_image_message
+and others. These start with
+flyer_chat
+to highlight that they are opinionated solutions.
+Feel free to use our packages or create your own custom widgets for message types! 🎨
+flutter_chat_core
+Details
+Section titled “flutter_chat_core Details”
+This package is the foundation and includes:
+Message Model
+: Defines different message types (text, image, file, system, etc.) and their specific details. ✉️
+User Model
+: Identifies users and message authors. 👤
+Customization Options
+:
+ChatTheme
+: Customize colors, fonts, and shapes to match your app’s look. 🖌️
+Builders
+: Use your own custom widgets for parts of the chat, like message bubbles, composer, message widgets, etc. 🛠️
+ChatController
+Explained
+Section titled “ChatController Explained”
+The
+ChatController
+is key for managing messages:
+It provides methods to
+insert, update, remove, or set
+messages. When these methods are called and the underlying data changes, the controller emits a
+ChatOperation
+event to signal the specific action that occurred.
+The
+ChatAnimatedList
+widget (which is the primary UI component for displaying messages) observes these
+ChatOperation
+events.
+ChatAnimatedList
+maintains its own internal array of messages, which is kept in sync with the
+ChatController
+’s data source by reacting to these events.
+This design supports the asynchronous nature of
+ChatController
+operations. All data manipulation methods in the controller (insert, update, etc.) are
+Future
+s. If they take time to complete (e.g., writing to a database), directly relying on the controller’s data source for UI updates could lead to inconsistencies or errors.
+To manage this,
+ChatAnimatedList
+adds incoming operations (derived from the observed events) to an internal queue. It then processes these operations one by one, ensuring smooth and predictable UI updates even when the underlying data operations are asynchronous.
+The controller also allows both users and internal package code to trigger message updates. For instance, an image message can determine its size and use the controller to save this information, preventing layout jumps later.
+By default, you get an
+InMemoryChatController
+, which forgets messages when the app restarts.
+Persistence with Custom Controllers
+While
+InMemoryChatController
+is convenient for quick starts, creating your own
+ChatController
+implementation (e.g., using Hive CE as shown in the example, or by following
+persisted controller guide
+) is crucial for saving messages permanently across app restarts.
+Reversed vs. Regular List
+Section titled “Reversed vs. Regular List”
+The
+ChatAnimatedList
+widget, which displays your messages, can be configured to operate in two main modes: reversed or regular. Both modes are designed to create a familiar chat experience where new messages appear near the input area and older messages scroll away. However, they achieve this with different internal mechanics, which impacts aspects like animations and pagination:
+Chat
+(
+builders
+:
+Builders
+(
+chatAnimatedListBuilder
+:
+(context
+,
+itemBuilder) {
+return
+ChatAnimatedList
+(
+// or ChatAnimatedListReversed, default is regular
+itemBuilder
+:
+itemBuilder
+,
+)
+;
+}
+,
+)
+,
+)
+1. Starting Point & Message Flow:
+Reversed List:
+The list’s
+0.0
+scroll position is at the
+visual bottom
+. When the first message is added, it appears at this visual bottom. Subsequent new messages are also added at the visual bottom, visually pushing older messages upwards.
+Regular List:
+The list’s
+0.0
+scroll position is at the
+visual top
+. The first message added will appear at this visual top. Subsequent messages are added below the preceding ones, extending the list downwards. To ensure the newest messages are visible near the input area (the common chat UI behavior), this list type relies on mechanisms to automatically scroll to the bottom when new content arrives. This auto-scrolling behavior can be customized:
+shouldScrollToEndWhenSendingMessage
+affects both list types, while
+shouldScrollToEndWhenAtBottom
+only applies to the Regular List (it has no effect on the Reversed List, which uses animation for new messages). Both are
+true
+by default.
+2. Data Source Compatibility:
+Both list types work with the
+same underlying data source
+. You do not need to manually reverse your message array when switching to a reversed list. This allows you to toggle between modes without affecting your data handling logic.
+3. Visual Appearance with Few vs. Many Messages:
+Few Messages:
+With a regular list, messages will appear at the top of the chat area. With a reversed list, they will appear at the bottom, just above the input area.
+Many Messages:
+If the messages fill the screen, the visual difference when scrolling might be less immediately obvious.
+4. Insert Animations:
+Reversed List:
+Since new messages appear at the visual bottom (where the user is typically focused), the list
+always uses an insert animation
+, smoothly pushing existing messages upwards.
+Regular List:
+Insert animations are typically only visible when adding the first few messages to an empty chat. Once the list fills the screen, new messages added to the end might appear to come from “behind” the input area, with the view scrolling to them via a scroll controller, rather than a distinct item insertion animation at the point of entry.
+5. Pagination and Initial Scroll Position (
+initialScrollToEndMode
+):
+This is a critical difference, especially for chats with a long history.
+Regular List Behavior:
+By default, Flutter lists start at scroll position
+0.0
+(the visual top). In a chat context, this means the user would initially see the oldest messages.
+The
+initialScrollToEndMode
+property (specific to the regular list configuration) attempts to mitigate this:
+none
+: The list starts at the top (oldest messages). Not ideal for chats.
+jump
+: The list attempts to instantly jump to the very end (newest messages).
+animate
+: The list animates a scroll from the top to the very end.
+Challenge:
+With a large number of messages (e.g., 200+), both
+jump
+and
+animate
+can feel laggy or produce a jarring visual effect as the list rapidly scrolls through content. This is generally not the expected behavior when opening a chat screen.
+Reversed List Behavior:
+Since
+0.0
+is at the visual bottom, the list
+naturally starts by showing the newest messages
+. There is no need for an equivalent of
+initialScrollToEndMode
+, and this property will have no effect if set.
+Workaround for Regular List Lag on Initial Load
+If you must use a regular list and want to avoid the initial scroll lag, here’s a potential workaround (not tested):
+Modify your
+ChatController
+to initially return only a small subset of the latest messages (e.g., the last 20).
+For this small set,
+initialScrollToEndMode: jump
+will appear practically instant.
+Implement the
+onEndReached
+callback. When the user scrolls upwards (towards older messages), load the next batch of historical messages from your local store.
+You can further extend this to fetch even older messages from a backend if the user continues to scroll up.
+6. Keyboard Handling:
+Reversed List:
+The list is naturally anchored to the bottom. When the keyboard appears or disappears, the list content moves smoothly with it.
+Regular List:
+Keyboard handling is managed automatically. We listen to keyboard height and then animate the content when the keyboard is up. This process has a slight delay, so you’ll see the keyboard report its full height before the content animates. This means it won’t be as smooth as the reversed list.
+cross_cache
+for Image Caching
+Section titled “cross_cache for Image Caching”
+We provide a
+cross_cache
+package specifically designed for caching images across all platforms, including web. 🖼️
+Main Use
+: This package is primarily used internally by
+flyer_chat_image_message
+to handle image caching efficiently.
+Flexibility
+: If you prefer a different caching solution or want more control, you can create your own custom image message widget. Doing so means the
+cross_cache
+package won’t be used by your implementation.
+For more details, check out the
+cross_cache
+README
+.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Simple Example
+Next
+Customisation
+
+--- Content from https://flyer.chat/docs/flutter/getting-started/customisation/ ---
+
+Customisation 🎨
+Flyer Chat offers several ways to tailor the chat interface to your needs:
+1. Using
+ChatTheme
+Section titled “1. Using ChatTheme”
+Adjust the overall look and feel by passing a
+ChatTheme
+object to the
+Chat
+widget. This controls:
+Colors
+:
+Quickly match your brand by overriding Material theme colors (
+primary
+,
+surface
+, etc.).
+Use
+ChatTheme.light()
+/
+ChatTheme.dark()
+for light/dark themes.
+Use
+ChatTheme.fromThemeData()
+to automatically sync with your app’s
+ThemeData
+.
+Use
+copyWith
+to selectively customize specific properties.
+Typography
+:
+Provide custom
+TextStyle
+s for
+body
+and
+label
+styles for consistent text rendering.
+Shape
+:
+Set message bubble
+borderRadius
+via the
+shape
+property (e.g.,
+shape: BorderRadius.zero
+).
+Note: Affects only message bubbles; other elements like the composer require separate styling.
+2. Using
+Builders
+Section titled “2. Using Builders”
+For more control over specific UI parts, use the
+builders
+parameter on the
+Chat
+widget:
+It provides numerous builder functions, each targeting a specific UI element (composer, message types, message bubble, etc.).
+Use these builders to replace default components with your own custom widgets.
+Builder names are self-descriptive (e.g.,
+composerBuilder
+,
+textMessageBuilder
+), indicating the part they control.
+This allows fundamental changes to the chat’s look and behavior.
+3. Using Parameters within Default Widgets
+Section titled “3. Using Parameters within Default Widgets”
+Often, you only need to tweak default Flyer Chat widgets (
+FlyerChatImageMessage
+,
+Composer
+, etc.) using their parameters, rather than replacing them entirely with a builder.
+General Idea
+: Most default widgets provided by Flyer Chat accept parameters for fine-tuning.
+Example:
+FlyerChatImageMessage
+: Pass parameters like
+borderRadius
+,
+placeholderColor
+,
+loadingIndicatorColor
+,
+showStatus
+, etc., to adjust its appearance when used (e.g., inside an
+imageMessageBuilder
+).
+Example:
+Composer
+: When using the default
+Composer
+(e.g., via
+composerBuilder
+), it offers numerous parameters for customization (e.g.,
+hintColor
+,
+focusNode
+,
+topWidget
+,
+backgroundColor
+and many more).
+Example:
+ChatMessage
+:
+Customize the default
+ChatMessage
+(used via
+chatMessageBuilder
+) with parameters like
+leadingWidget
+,
+trailingWidget
+,
+topWidget
+,
+bottomWidget
+, and many others.
+Crucially, the
+chatMessageBuilder
+receives the specific
+message
+object.
+This allows inspecting message properties (author, type, metadata) to conditionally customize the output (e.g., pass different parameters, add specific widgets).
+Offers highly flexible, per-message layout possibilities.
+Combine these methods to achieve your desired look and feel. Always check the specific parameters available on the default widgets and builders for the full range of options.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Flyer Chat Architecture
+Next
+Migration from V1
+
+--- Content from https://flyer.chat/docs/flutter/getting-started/migration/ ---
+
+Migration from v1 🔄
+Major Rewrite!
+Flyer Chat v2 is a significant departure from v1. While this guide covers key breaking changes in models and the
+Chat
+widget, expect to refactor other areas of your implementation as well. Direct migration is not possible.
+Firebase Migration
+For additional insights into migrating your Firebase application with Flyer Chat v2, please refer to the discussion and resources available in this GitHub issue:
+flyerhq/flutter_chat_ui#750
+.
+This document highlights the most critical breaking changes to help you get started:
+Key updates to the core data models.
+Changes to the required parameters for the main
+Chat
+widget.
+While this won’t cover every difference, understanding these core changes is the essential first step in adapting your v1 codebase.
+Message Model Changes
+Section titled “Message Model Changes”
+author
+->
+authorId
+: v2 now resolves user objects based on their ID.
+createdAt
+: Type changed from
+int
+to
+DateTime
+. It serializes to milliseconds UTC timestamp in JSON.
+status
+: Replaced by a combination of optional
+DateTime?
+fields (
+deletedAt
+,
+failedAt
+,
+sentAt
+,
+deliveredAt
+,
+seenAt
+,
+updatedAt
+). The package calculates the status based on which fields are set, allowing for more granular control (useful for features like message history).
+Image Message Specific Changes
+Section titled “Image Message Specific Changes”
+name
+: Removed.
+size
+: Removed.
+uri
+->
+source
+: Renamed to highlight that the image source can be varied (local, remote, base64 string, etc.).
+File Message Specific Changes
+Section titled “File Message Specific Changes”
+size
+: No longer required.
+uri
+->
+source
+: Renamed to highlight that the file source can be varied (local, remote, etc.).
+Video Message Specific Changes
+Section titled “Video Message Specific Changes”
+name
+,
+size
+: No longer required.
+uri
+->
+source
+: Renamed to highlight that the video source can be varied (local, remote, etc.).
+Audio Message Specific Changes
+Section titled “Audio Message Specific Changes”
+name
+: Removed.
+mimeType
+: Removed.
+size
+: No longer required.
+duration
+: Now serialized as
+int
+in seconds (instead of milliseconds).
+uri
+->
+source
+: Renamed to highlight that the audio source can be varied (local, remote, etc.).
+User Model Changes
+Section titled “User Model Changes”
+imageUri
+->
+imageSource
+: Renamed to highlight that the image source can be varied (local, remote, base64 string, etc.).
+firstName
+,
+lastName
+->
+name
+: Simplified to a single field.
+createdAt
+: Type changed from
+int
+to
+DateTime
+. It serializes to milliseconds UTC timestamp in JSON.
+Chat
+Widget Parameter Changes
+Section titled “Chat Widget Parameter Changes”
+messages
+: Replaced by the required
+chatController
+parameter. See the
+Architecture
+section for details on controller.
+onSendPressed
+: No longer exists. The alternative is the optional
+onMessageSent
+callback.
+user
+: Replaced by two required parameters:
+currentUserId
+(
+UserID
+): The ID of the currently logged-in user (equivalent to v1’s
+user.id
+).
+resolveUser
+(
+Future<User> Function(UserID id)
+): An async function that takes a user ID and returns the corresponding
+User
+object. v2 uses IDs internally and calls this function (with in-memory caching) whenever user data is needed.
+For anything else, please refer to the rest of this documentation, search or
+open an issue on GitHub
+.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Customisation
+Next
+Persisted Controller
+
+--- Content from https://flyer.chat/docs/flutter/guides/persisted-controller/ ---
+
+Persisted Controller 🔄
+A controller in
+flutter_chat_ui
+acts as the source of truth for your chat data, primarily managing the messages. When implementing a persisted controller, understanding how your data source handles order is crucial. There are primarily two types of data sources to consider: ordered and non-ordered.
+Ordered Data Sources
+Section titled “Ordered Data Sources”
+An ordered data source maintains a specific sequence for its elements. A simple example is an array, which is utilized by the
+InMemoryChatController
+provided by the
+flutter_chat_core
+package.
+With an array-based (and thus ordered) data source, operations are straightforward:
+You can insert messages at any specific index.
+You can update messages at any specific index.
+You can simply return the array from the
+messages
+getter.
+However, it’s important to note that the
+InMemoryChatController
+is, by its nature,
+not persisted
+. While simple to work with, its data will be lost when the application session ends.
+Non-Ordered Data Sources (Common for Persisted Controllers)
+Section titled “Non-Ordered Data Sources (Common for Persisted Controllers)”
+For persisted controllers, you will most likely be working with some form of database.
+Databases with Implicit Ordering (e.g., Auto-Increment Keys)
+Section titled “Databases with Implicit Ordering (e.g., Auto-Increment Keys)”
+If your chosen database supports inherent ordering (for instance, through auto-incrementing primary keys), and you don’t anticipate needing to insert messages into the middle of an existing conversation, this will work similarly to the
+InMemoryChatController
+. You won’t be able to insert or update at a specific index, but you can still simply return the ordered data directly from the database.
+Offline-First Strategy
+Be mindful of potential complications if you are implementing an offline-first strategy with backend synchronization. If messages created offline need to be inserted into historical positions upon syncing, simple auto-increment keys can lead to collisions or an inability to correctly place messages, resulting in a problematic data state.
+Databases with No Inherent Ordering
+Section titled “Databases with No Inherent Ordering”
+Many databases will not guarantee any specific order when you retrieve data. They operate without auto-increment keys or an intrinsic sense of sequence.
+In this scenario:
+You typically add new messages to the database without specifying a position.
+You
+cannot
+reliably implement functions like
+insertMessage({int? index})
+or
+insertAllMessages({int? index})
+because there’s no stable concept of an “index” directly from the database.
+Recommended Approach:
+Insertion
+: Add messages to the database as they arrive.
+Retrieval (
+messages
+getter)
+:
+Fetch all relevant messages from your data source.
+Sort
+these messages based on a reliable key before returning them. A common and effective choice is a
+createdAt
+timestamp, serialized to milliseconds for precise ordering.
+Benefits
+:
+This approach consistently ensures the correct message order in your UI.
+It robustly handles offline-first scenarios. When syncing with a backend, new and historical messages can be seamlessly integrated and correctly ordered because the sorting logic remains consistent.
+A practical example of this approach using Hive CE can be found in the example project -
+HiveChatController
+.
+Updating and Removing Messages
+When working with a persisted controller that relies on sorting (especially with non-ordered underlying data sources), the following is absolutely crucial for data integrity:
+Before you update or remove a message in your database, you MUST:
+Obtain the
+latest sorted list
+of messages (i.e., the list as returned by your
+messages
+getter after sorting).
+Find the index of the message you wish to update or remove
+from this sorted list
+.
+Use this index for your internal logic and to identify the correct message in the database.
+Why is this critical?
+If you attempt to derive an index or identify a message directly from the (potentially unsorted) database without consulting your canonical sorted list, you risk operating on the wrong message. This can lead to data corruption, where updates are applied incorrectly, or the wrong messages are deleted. Always use the sorted list as your reference point for any index-sensitive operations.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Migration from V1
+Next
+Status Indicators
+
+--- Content from https://flyer.chat/docs/flutter/guides/status-indicators/ ---
+
+Status Indicators 🔔
+This guide explains how Flyer Chat handles and displays message status indicators (like sending spinners, error icons, or delivery/read ticks).
+How Status Works
+Section titled “How Status Works”
+Instead of a single
+status
+field (like an enum), Flyer Chat determines the message status based on a combination of nullable
+DateTime?
+fields and an optional
+bool sending
+flag in the
+Message
+’s metadata map. This approach offers more granular control and flexibility.
+The key fields involved are:
+DateTime? failedAt
+: Timestamp when the message failed to send.
+DateTime? sentAt
+: Timestamp when the message was successfully sent from the device.
+DateTime? deliveredAt
+: Timestamp when the message was delivered to the recipient(s).
+DateTime? seenAt
+: Timestamp when the message was seen/read by the recipient(s).
+The
+Chat
+widget automatically displays the appropriate visual indicator based on which of these fields are set (and their order of precedence):
+metadata?['sending'] == true
+: Shows a
+sending spinner
+⏳.
+failedAt != null
+: Shows an
+error icon
+❗.
+seenAt != null
+: Shows a
+double tick
+(read indicator) ✔️✔️.
+deliveredAt != null
+: Shows a
+single tick
+(delivered indicator) ✔️.
+sentAt != null
+: Shows a
+single tick
+(sent indicator) ✔️.
+Difference between sent and delivered
+Both
+sentAt
+and
+deliveredAt
+show a single tick by default. The distinction is semantic, allowing you to implement features like delayed notifications (similar to Slack) where a message might be “sent” but not yet “delivered” to trigger a push notification. You can omit one or another if you don’t need such functionality.
+Other
+DateTime?
+fields
+Other
+DateTime?
+fields like
+createdAt
+,
+updatedAt
+, and
+deletedAt
+track the message’s lifecycle but do not directly correspond to a
+visual
+status indicator shown by the default
+ChatMessage
+widget.
+Positioning and Visibility
+Section titled “Positioning and Visibility”
+By default, the status indicator appears inside the message bubble, positioned at the
+bottom end
+.
+You can customize this behavior using parameters available on most default Flyer Chat message widgets (like
+SimpleTextMessage
+,
+FlyerChatTextMessage
+,
+FlyerChatImageMessage
+, etc.):
+timeAndStatusPosition
+: This parameter controls where the timestamp and status indicator are rendered relative to the message content. You can set it to:
+TimeAndStatusPosition.end
+(Default)
+TimeAndStatusPosition.start
+TimeAndStatusPosition.inline
+(Places it directly after the message content, where applicable, e.g., for text messages).
+showStatus
+(
+bool
+)
+: Set this to
+false
+to hide the status indicator completely. This is useful if you don’t need status indicators, or if you prefer to display the status
+outside
+the message bubble using a custom
+chatMessageBuilder
+.
+These parameters give you flexibility in integrating the status display with your specific message design.
+Examples
+Section titled “Examples”
+Example 1: Show a single tick for every message
+_chatController
+.
+insertMessage
+(
+TextMessage
+(
+// Better to use UUID or similar for the ID - IDs must be unique.
+id
+:
+'
+${
+Random
+().
+nextInt
+(
+1000
+) +
+1
+}
+'
+,
+authorId
+:
+'user1'
+,
+createdAt
+:
+DateTime
+.
+now
+()
+.
+toUtc
+()
+,
+sentAt
+:
+DateTime
+.
+now
+()
+.
+toUtc
+()
+,
+// <- Add this line
+text
+:
+'Hello, world!'
+,
+)
+,
+)
+;
+Example 2: Show status inline for text messages
+Text message widgets
+SimpleTextMessage
+is already provided by the
+flutter_chat_ui
+package. However, if you need additional features like markdown support, you can install and use the
+flyer_chat_text_message
+package.
+// Optionally install the flyer_chat_text_message package
+import
+'package:flyer_chat_text_message/flyer_chat_text_message.dart'
+;
+Chat
+(
+// ...
+builders
+:
+Builders
+(
+textMessageBuilder
+:
+(context
+,
+message
+,
+index
+,
+{
+required
+bool
+isSentByMe
+,
+MessageGroupStatus
+?
+groupStatus
+,
+}) {
+return
+SimpleTextMessage
+(
+// or FlyerChatTextMessage
+message
+:
+message
+,
+index
+:
+index
+,
+timeAndStatusPosition
+:
+TimeAndStatusPosition
+.
+inline
+,
+)
+;
+}
+,
+)
+,
+)
+,
+Customize other message types
+Use other builders like
+imageMessageBuilder
+,
+fileMessageBuilder
+, etc. to customize other message types.
+Example 3: Hide status indicators for text messages
+Chat
+(
+// ...
+builders
+:
+Builders
+(
+textMessageBuilder
+:
+(context
+,
+message
+,
+index
+,
+{
+required
+bool
+isSentByMe
+,
+MessageGroupStatus
+?
+groupStatus
+,
+}) {
+return
+SimpleTextMessage
+(
+// or FlyerChatTextMessage
+message
+:
+message
+,
+index
+:
+index
+,
+showStatus
+:
+false
+,
+)
+;
+}
+,
+)
+,
+)
+,
+Example 4: Move status outside the message bubble
+Chat
+(
+// ...
+builders
+:
+Builders
+(
+// We need to use chatMessageBuilder to change anything outside the message bubble.
+chatMessageBuilder
+:
+(
+context
+,
+message
+,
+index
+,
+animation
+,
+child
+,
+{
+bool
+?
+isRemoved
+,
+required
+bool
+isSentByMe
+,
+MessageGroupStatus
+?
+groupStatus
+,
+}) {
+final
+currentStatus
+=
+message
+.
+status
+;
+return
+ChatMessage
+(
+message
+:
+message
+,
+index
+:
+index
+,
+animation
+:
+animation
+,
+isRemoved
+:
+isRemoved
+,
+groupStatus
+:
+groupStatus
+,
+// Here we add a widget that will be displayed at the end of the message bubble.
+trailingWidget
+:
+currentStatus
+!=
+null
+?
+Padding
+(
+// Adding some padding so the icon looks nicer.
+padding
+:
+const
+EdgeInsets
+.
+fromLTRB
+(
+4
+,
+0
+,
+0
+,
+8
+)
+,
+child
+:
+Icon
+(
+// getIconForStatus is a helper function provided by
+// flutter_chat_ui that returns an icon based on the message status.
+getIconForStatus
+(currentStatus)
+,
+// Consider using theme based on the system brightness.
+color
+:
+ChatTheme
+.
+light
+()
+.
+colors
+.
+onSurface
+,
+size
+:
+12
+,
+)
+,
+)
+// If there is no status, we display a SizedBox
+// so the messages are aligned properly.
+:
+const
+SizedBox
+(width
+:
+12
+)
+,
+child
+:
+child
+,
+)
+;
+}
+,
+// Remember to hide the default status indicator inside the text message bubble!
+textMessageBuilder
+:
+(context
+,
+message
+,
+index
+,
+{
+required
+bool
+isSentByMe
+,
+MessageGroupStatus
+?
+groupStatus
+,
+}) {
+return
+SimpleTextMessage
+(
+// or FlyerChatTextMessage
+message
+:
+message
+,
+index
+:
+index
+,
+showStatus
+:
+false
+,
+)
+;
+}
+,
+// Hide statuses for other message widgets if needed.
+// imageMessageBuilder: (context, message, index, {
+//   required bool isSentByMe,
+//   MessageGroupStatus? groupStatus,
+// }) {
+//   return FlyerChatImageMessage(
+//     message: message,
+//     index: index,
+//     showStatus: false,
+//   );
+// },
+)
+,
+)
+,
+Using other message properties
+You can use
+message.authorId == currentUserId
+to determine if the message is sent by the current user and adjust the status display accordingly (e.g., only show detailed status for outgoing messages). The possibilities for conditional rendering are vast.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Persisted Controller
+Next
+Dynamic Theming
+
+--- Content from https://flyer.chat/docs/flutter/guides/dynamic-theming/ ---
+
+Dynamic Theming 🎨
+This guide explains how to handle light/dark modes and customize the visual appearance of Flyer Chat using its theming system.
+Automatic Dark Mode Support
+Section titled “Automatic Dark Mode Support”
+Flyer Chat can adapt to the system’s light or dark mode automatically. You have two main options:
+Switch themes based on brightness:
+Manually select
+ChatTheme.light()
+or
+ChatTheme.dark()
+depending on the current
+Brightness
+.
+Use your app’s
+ThemeData
+:
+Pass your application’s
+ThemeData
+to
+ChatTheme.fromThemeData()
+to automatically align Flyer Chat’s styling.
+@override
+Widget
+build
+(
+BuildContext
+context) {
+// Option 1: Select theme based on system brightness
+final
+brightness
+=
+MediaQuery
+.
+platformBrightnessOf
+(context)
+;
+final
+chatTheme
+=
+brightness
+==
+Brightness
+.
+dark
+?
+ChatTheme
+.
+dark
+()
+:
+ChatTheme
+.
+light
+()
+;
+// Option 2: Use theme derived from your app's ThemeData
+// final appTheme = Theme.of(context);
+// final chatTheme = ChatTheme.fromThemeData(appTheme);
+return
+Chat
+(
+// ...
+theme
+:
+chatTheme
+,
+// Pass the selected or derived theme
+)
+;
+}
+Customizing the Base Theme
+Section titled “Customizing the Base Theme”
+You can modify the default light or dark themes using
+copyWith
+. This is useful for applying broad changes, like matching a brand color.
+Example 1: Changing a color for the currently active theme (light OR dark)
+If you have a
+chatTheme
+variable determined by brightness (as in the example above), using
+copyWith
+on it will modify whichever theme (
+light
+or
+dark
+) is currently active.
+chatTheme
+.
+copyWith
+(
+colors
+:
+chatTheme
+.
+colors
+.
+copyWith
+(
+primary
+:
+Colors
+.
+red
+,
+// Changes primary for the active theme
+)
+,
+)
+;
+Example 2: Changing a color
+only
+for the light theme
+To target a specific mode, apply
+copyWith
+directly to the colors of
+ChatTheme.light()
+or
+ChatTheme.dark()
+. Alternatively, use the provided
+withLightColors
+or
+withDarkColors
+extensions.
+final
+brightness
+=
+MediaQuery
+.
+platformBrightnessOf
+(context)
+;
+final
+chatTheme
+=
+brightness
+==
+Brightness
+.
+dark
+?
+ChatTheme
+.
+dark
+()
+// Use default dark theme
+:
+ChatTheme
+.
+light
+()
+.
+withLightColors
+(
+primary
+:
+Colors
+.
+red
+,
+// Primary is red only when light theme is active
+)
+;
+Setting a Font Family
+Both
+ChatTheme.dark()
+and
+ChatTheme.light()
+constructors accept a
+fontFamily
+parameter. This allows you to easily set a custom font family for the entire chat UI, even if you don’t use
+ChatTheme.fromThemeData()
+.
+Widget-Specific Overrides
+Section titled “Widget-Specific Overrides”
+While
+ChatTheme
+sets the base style, you often need to customize individual widgets. Many default Flyer Chat widgets (like
+SimpleTextMessage
+,
+FlyerChatTextMessage
+,
+FlyerChatImageMessage
+, etc.) accept specific styling parameters that override the
+ChatTheme
+.
+This is done using the
+builders
+parameter on the
+Chat
+widget.
+Example: Changing background color for sent text messages
+This overrides the theme’s default background for sent messages without affecting the theme’s
+primary
+color globally.
+Chat
+(
+// ...
+builders
+:
+Builders
+(
+textMessageBuilder
+:
+(context
+,
+message
+,
+index
+,
+{
+required
+bool
+isSentByMe
+,
+MessageGroupStatus
+?
+groupStatus
+,
+}) {
+return
+SimpleTextMessage
+(
+message
+:
+message
+,
+index
+:
+index
+,
+sentBackgroundColor
+:
+Colors
+.
+red
+,
+)
+;
+}
+,
+)
+,
+theme
+:
+chatTheme
+,
+// Base theme still applied
+)
+Discovering Widget Parameters
+Explore the parameters accepted by each default widget usable within
+builders
+(like
+SimpleTextMessage
+,
+FlyerChatTextMessage
+,
+FlyerChatImageMessage
+,
+Composer
+,
+ChatMessage
+, etc.) to see the full range of available widget-specific customizations. If a customization you need isn’t available via a parameter, please raise an issue on
+GitHub
+.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Status Indicators
+Next
+More Guides
+
+--- Content from https://flyer.chat/docs/flutter/guides/more-guides/ ---
+
+More Guides 📚
+We are continuously working on expanding the documentation. If you have specific topics you’d like to see covered, or if you encounter challenges not addressed in the current guides, please let us know by
+opening an issue on GitHub
+!
+Future guides will include:
+Advanced message layouts using
+ChatMessage
+builders, group chats, etc.
+Creating and integrating custom message types
+Handling user typing indicators
+Internationalization (i18n) and localization (l10n)
+Scrolling to the specific message
+Customizing border radiuses
+Pagination
+Scroll behavior customization, including AI agent similar scroll
+Creating a custom composer and listening to its height changes
+Your feedback helps us prioritize what to document next!
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Dynamic Theming
+
+--- Content from https://flyer.chat/docs/flutter/getting-started/architecture ---
+
+Flyer Chat Architecture 🏗️
+Flyer Chat is built with two core packages:
+flutter_chat_ui
+: The main package you’ll use for the chat interface. It’s kept simple with few dependencies for better performance.
+flutter_chat_core
+: Contains shared models and helper functions used by all Flyer Chat packages.
+We also offer extra packages for common message types, like
+flyer_chat_text_message
+,
+flyer_chat_image_message
+and others. These start with
+flyer_chat
+to highlight that they are opinionated solutions.
+Feel free to use our packages or create your own custom widgets for message types! 🎨
+flutter_chat_core
+Details
+Section titled “flutter_chat_core Details”
+This package is the foundation and includes:
+Message Model
+: Defines different message types (text, image, file, system, etc.) and their specific details. ✉️
+User Model
+: Identifies users and message authors. 👤
+Customization Options
+:
+ChatTheme
+: Customize colors, fonts, and shapes to match your app’s look. 🖌️
+Builders
+: Use your own custom widgets for parts of the chat, like message bubbles, composer, message widgets, etc. 🛠️
+ChatController
+Explained
+Section titled “ChatController Explained”
+The
+ChatController
+is key for managing messages:
+It provides methods to
+insert, update, remove, or set
+messages. When these methods are called and the underlying data changes, the controller emits a
+ChatOperation
+event to signal the specific action that occurred.
+The
+ChatAnimatedList
+widget (which is the primary UI component for displaying messages) observes these
+ChatOperation
+events.
+ChatAnimatedList
+maintains its own internal array of messages, which is kept in sync with the
+ChatController
+’s data source by reacting to these events.
+This design supports the asynchronous nature of
+ChatController
+operations. All data manipulation methods in the controller (insert, update, etc.) are
+Future
+s. If they take time to complete (e.g., writing to a database), directly relying on the controller’s data source for UI updates could lead to inconsistencies or errors.
+To manage this,
+ChatAnimatedList
+adds incoming operations (derived from the observed events) to an internal queue. It then processes these operations one by one, ensuring smooth and predictable UI updates even when the underlying data operations are asynchronous.
+The controller also allows both users and internal package code to trigger message updates. For instance, an image message can determine its size and use the controller to save this information, preventing layout jumps later.
+By default, you get an
+InMemoryChatController
+, which forgets messages when the app restarts.
+Persistence with Custom Controllers
+While
+InMemoryChatController
+is convenient for quick starts, creating your own
+ChatController
+implementation (e.g., using Hive CE as shown in the example, or by following
+persisted controller guide
+) is crucial for saving messages permanently across app restarts.
+Reversed vs. Regular List
+Section titled “Reversed vs. Regular List”
+The
+ChatAnimatedList
+widget, which displays your messages, can be configured to operate in two main modes: reversed or regular. Both modes are designed to create a familiar chat experience where new messages appear near the input area and older messages scroll away. However, they achieve this with different internal mechanics, which impacts aspects like animations and pagination:
+Chat
+(
+builders
+:
+Builders
+(
+chatAnimatedListBuilder
+:
+(context
+,
+itemBuilder) {
+return
+ChatAnimatedList
+(
+// or ChatAnimatedListReversed, default is regular
+itemBuilder
+:
+itemBuilder
+,
+)
+;
+}
+,
+)
+,
+)
+1. Starting Point & Message Flow:
+Reversed List:
+The list’s
+0.0
+scroll position is at the
+visual bottom
+. When the first message is added, it appears at this visual bottom. Subsequent new messages are also added at the visual bottom, visually pushing older messages upwards.
+Regular List:
+The list’s
+0.0
+scroll position is at the
+visual top
+. The first message added will appear at this visual top. Subsequent messages are added below the preceding ones, extending the list downwards. To ensure the newest messages are visible near the input area (the common chat UI behavior), this list type relies on mechanisms to automatically scroll to the bottom when new content arrives. This auto-scrolling behavior can be customized:
+shouldScrollToEndWhenSendingMessage
+affects both list types, while
+shouldScrollToEndWhenAtBottom
+only applies to the Regular List (it has no effect on the Reversed List, which uses animation for new messages). Both are
+true
+by default.
+2. Data Source Compatibility:
+Both list types work with the
+same underlying data source
+. You do not need to manually reverse your message array when switching to a reversed list. This allows you to toggle between modes without affecting your data handling logic.
+3. Visual Appearance with Few vs. Many Messages:
+Few Messages:
+With a regular list, messages will appear at the top of the chat area. With a reversed list, they will appear at the bottom, just above the input area.
+Many Messages:
+If the messages fill the screen, the visual difference when scrolling might be less immediately obvious.
+4. Insert Animations:
+Reversed List:
+Since new messages appear at the visual bottom (where the user is typically focused), the list
+always uses an insert animation
+, smoothly pushing existing messages upwards.
+Regular List:
+Insert animations are typically only visible when adding the first few messages to an empty chat. Once the list fills the screen, new messages added to the end might appear to come from “behind” the input area, with the view scrolling to them via a scroll controller, rather than a distinct item insertion animation at the point of entry.
+5. Pagination and Initial Scroll Position (
+initialScrollToEndMode
+):
+This is a critical difference, especially for chats with a long history.
+Regular List Behavior:
+By default, Flutter lists start at scroll position
+0.0
+(the visual top). In a chat context, this means the user would initially see the oldest messages.
+The
+initialScrollToEndMode
+property (specific to the regular list configuration) attempts to mitigate this:
+none
+: The list starts at the top (oldest messages). Not ideal for chats.
+jump
+: The list attempts to instantly jump to the very end (newest messages).
+animate
+: The list animates a scroll from the top to the very end.
+Challenge:
+With a large number of messages (e.g., 200+), both
+jump
+and
+animate
+can feel laggy or produce a jarring visual effect as the list rapidly scrolls through content. This is generally not the expected behavior when opening a chat screen.
+Reversed List Behavior:
+Since
+0.0
+is at the visual bottom, the list
+naturally starts by showing the newest messages
+. There is no need for an equivalent of
+initialScrollToEndMode
+, and this property will have no effect if set.
+Workaround for Regular List Lag on Initial Load
+If you must use a regular list and want to avoid the initial scroll lag, here’s a potential workaround (not tested):
+Modify your
+ChatController
+to initially return only a small subset of the latest messages (e.g., the last 20).
+For this small set,
+initialScrollToEndMode: jump
+will appear practically instant.
+Implement the
+onEndReached
+callback. When the user scrolls upwards (towards older messages), load the next batch of historical messages from your local store.
+You can further extend this to fetch even older messages from a backend if the user continues to scroll up.
+6. Keyboard Handling:
+Reversed List:
+The list is naturally anchored to the bottom. When the keyboard appears or disappears, the list content moves smoothly with it.
+Regular List:
+Keyboard handling is managed automatically. We listen to keyboard height and then animate the content when the keyboard is up. This process has a slight delay, so you’ll see the keyboard report its full height before the content animates. This means it won’t be as smooth as the reversed list.
+cross_cache
+for Image Caching
+Section titled “cross_cache for Image Caching”
+We provide a
+cross_cache
+package specifically designed for caching images across all platforms, including web. 🖼️
+Main Use
+: This package is primarily used internally by
+flyer_chat_image_message
+to handle image caching efficiently.
+Flexibility
+: If you prefer a different caching solution or want more control, you can create your own custom image message widget. Doing so means the
+cross_cache
+package won’t be used by your implementation.
+For more details, check out the
+cross_cache
+README
+.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Simple Example
+Next
+Customisation
+
+--- Content from https://flyer.chat/docs/flutter/guides/persisted-controller ---
+
+Persisted Controller 🔄
+A controller in
+flutter_chat_ui
+acts as the source of truth for your chat data, primarily managing the messages. When implementing a persisted controller, understanding how your data source handles order is crucial. There are primarily two types of data sources to consider: ordered and non-ordered.
+Ordered Data Sources
+Section titled “Ordered Data Sources”
+An ordered data source maintains a specific sequence for its elements. A simple example is an array, which is utilized by the
+InMemoryChatController
+provided by the
+flutter_chat_core
+package.
+With an array-based (and thus ordered) data source, operations are straightforward:
+You can insert messages at any specific index.
+You can update messages at any specific index.
+You can simply return the array from the
+messages
+getter.
+However, it’s important to note that the
+InMemoryChatController
+is, by its nature,
+not persisted
+. While simple to work with, its data will be lost when the application session ends.
+Non-Ordered Data Sources (Common for Persisted Controllers)
+Section titled “Non-Ordered Data Sources (Common for Persisted Controllers)”
+For persisted controllers, you will most likely be working with some form of database.
+Databases with Implicit Ordering (e.g., Auto-Increment Keys)
+Section titled “Databases with Implicit Ordering (e.g., Auto-Increment Keys)”
+If your chosen database supports inherent ordering (for instance, through auto-incrementing primary keys), and you don’t anticipate needing to insert messages into the middle of an existing conversation, this will work similarly to the
+InMemoryChatController
+. You won’t be able to insert or update at a specific index, but you can still simply return the ordered data directly from the database.
+Offline-First Strategy
+Be mindful of potential complications if you are implementing an offline-first strategy with backend synchronization. If messages created offline need to be inserted into historical positions upon syncing, simple auto-increment keys can lead to collisions or an inability to correctly place messages, resulting in a problematic data state.
+Databases with No Inherent Ordering
+Section titled “Databases with No Inherent Ordering”
+Many databases will not guarantee any specific order when you retrieve data. They operate without auto-increment keys or an intrinsic sense of sequence.
+In this scenario:
+You typically add new messages to the database without specifying a position.
+You
+cannot
+reliably implement functions like
+insertMessage({int? index})
+or
+insertAllMessages({int? index})
+because there’s no stable concept of an “index” directly from the database.
+Recommended Approach:
+Insertion
+: Add messages to the database as they arrive.
+Retrieval (
+messages
+getter)
+:
+Fetch all relevant messages from your data source.
+Sort
+these messages based on a reliable key before returning them. A common and effective choice is a
+createdAt
+timestamp, serialized to milliseconds for precise ordering.
+Benefits
+:
+This approach consistently ensures the correct message order in your UI.
+It robustly handles offline-first scenarios. When syncing with a backend, new and historical messages can be seamlessly integrated and correctly ordered because the sorting logic remains consistent.
+A practical example of this approach using Hive CE can be found in the example project -
+HiveChatController
+.
+Updating and Removing Messages
+When working with a persisted controller that relies on sorting (especially with non-ordered underlying data sources), the following is absolutely crucial for data integrity:
+Before you update or remove a message in your database, you MUST:
+Obtain the
+latest sorted list
+of messages (i.e., the list as returned by your
+messages
+getter after sorting).
+Find the index of the message you wish to update or remove
+from this sorted list
+.
+Use this index for your internal logic and to identify the correct message in the database.
+Why is this critical?
+If you attempt to derive an index or identify a message directly from the (potentially unsorted) database without consulting your canonical sorted list, you risk operating on the wrong message. This can lead to data corruption, where updates are applied incorrectly, or the wrong messages are deleted. Always use the sorted list as your reference point for any index-sensitive operations.
+Edit page
+Last updated:
+Jul 15, 2025
+Previous
+Migration from V1
+Next
+Status Indicators
+
+--- Content from https://flyer.chat/blog ---
+
+docs
+D
+blog
+B
+contact
+C
+github
+Blog Archive
+Introducing Flyer Chat v2 - Built for Flexibility, Performance, and the Future 🚀
+May 1, 2025
+We are pleased to announce the release of Flyer Chat v2, a significant update to our open-source chat UI package for Flutter. This new version provides enhanced flexibility, improved performance, and the capability to build diverse chat interfaces.
+2025, FLYER LABS LTD
+Contact us
+
+--- Content from https://flyer.chat/blog/v2-announcement/ ---
+
+Introducing Flyer Chat v2 - Built for Flexibility, Performance, and the Future 🚀
+May 1, 2025
+We are pleased to announce the release of
+Flyer Chat v2
+, a significant update to our open-source chat UI package for Flutter. This new version provides enhanced flexibility, improved performance, and the capability to build diverse chat interfaces.
+The Journey: Why v2?
+Section titled “The Journey: Why v2?”
+When Flyer Chat started in 2020, the initial goal was simple: simplify the process of adding chat interfaces to applications. The aim was a package requiring minimal configuration – primarily a user ID and messages – with the package handling the rest.
+However, it quickly became clear that “one size fits all” doesn’t apply to chat. Different projects required distinct layouts, unique features, and extensive customization options. Attempting to accommodate these variations through parameters led to increasingly complex components and reduced maintainability. Furthermore, implementing features like audio messages often requires dependencies that only support iOS/Android, which conflicted with our goal of supporting
+all
+Flutter platforms, including web and desktop.
+So, reflecting on these challenges, we decided a fresh start was needed – one focused on
+flexibility, performance, and being ready for the future
+. ✨
+Meet the New Architecture: How v2 Works
+Section titled “Meet the New Architecture: How v2 Works”
+Flyer Chat v2 introduces a new architecture centered around three core concepts:
+ChatController
+: This controller is now central to managing message state. It handles message insertion, updates, and deletion. It enables internal state updates, such as an image message determining its dimensions post-loading. Crucially, it provides the foundation for
+persistent storage
+. While an
+InMemoryChatController
+is provided for quick setup (losing state on restart), you can readily implement custom controllers using storage solutions like Sembast or Hive for persistence (see examples).
+The Builder Pattern
+: Gain granular control over the UI. V2 allows replacing
+any
+UI component using dedicated
+builders
+. Whether you need a custom input field or want to display additional message metadata, simply provide your own widget implementation via builders like
+composerBuilder
+or
+textMessageBuilder
+. You can also adapt the default implementations by copying the source code and modifying specific parts. 🛠️
+Modular Message Packages
+: Addressing the challenge with platform-specific features like audio messages, v2 introduces optional, separate packages for common message types (e.g.,
+flyer_chat_text_message
+,
+flyer_chat_image_message
+). You install only the packages and dependencies you require. This keeps the core UI package lean and provides flexibility in choosing implementations. If you target only mobile, you can use a package with native dependencies. If you need web compatibility, you can create or utilize a cross-platform implementation. This modularity also simplifies community contributions for new message types. 📦
+Learn more about the new architecture here
+.
+Performance and Modern Use Cases
+Section titled “Performance and Modern Use Cases”
+Beyond flexibility, v2 prioritizes key improvements:
+Performance
+: Leveraging the
+provider
+package for state management ensures efficient updates, rebuilding only necessary widgets. This results in smoother animations and improved responsiveness.
+AI Assistant Ready
+: V2 was designed considering the rise of AI assistants. Features like
+text streaming
+are supported, making Flyer Chat suitable for modern AI conversational interfaces alongside traditional messaging applications. 🤖
+True Cross-Platform Support
+: A core goal achieved in v2 is robust support for
+all
+Flutter platforms: iOS, Android, Web, macOS, Windows, and Linux. Features like image uploading, downloading, and others are designed to work seamlessly everywhere. 🌐
+Ensuring Production Readiness
+Section titled “Ensuring Production Readiness”
+A significant limitation of v1 was its primary focus on UI without extensive testing against real-world backend interactions. V2 addresses this directly. Alongside the UI package, we developed a complete
+example messenger application
+using a custom backend (with temporary chats for testing).This allowed us to test the chat UI against various practical scenarios.
+We also built an
+AI assistant example
+using Gemini to validate its suitability for generative AI use cases.
+This real-world testing process has been invaluable, leading to a more robust, refined API and ensuring Flyer Chat v2 is truly production-ready. ✅
+Customization Options
+Section titled “Customization Options”
+In addition to builders, v2 offers robust theming capabilities:
+ChatTheme
+: Easily customize colors, typography, and message bubble shapes via the
+ChatTheme
+object. Use predefined themes (
+light
+,
+dark
+), derive from your app’s
+ThemeData
+, or use
+copyWith
+for specific overrides.
+Widget Parameters
+: Many default message widgets (e.g.,
+SimpleTextMessage
+,
+FlyerChatImageMessage
+) accept parameters (like
+borderRadius
+,
+backgroundColor
+,
+showStatus
+) for fine-tuning directly within builders.
+Combine
+ChatTheme
+,
+Builders
+, and widget parameters to achieve the desired appearance.
+Explore all customization options in detail here
+.
+Migrating from v1
+Section titled “Migrating from v1”
+Please note: Flyer Chat v2 is a
+major rewrite
+. Due to fundamental architectural changes, direct migration from v1 is not possible; refactoring your implementation is required.
+Key breaking changes include:
+Message Model
+:
+author
+is now
+authorId
+,
+createdAt
+is a
+DateTime
+.
+Chat
+Widget
+: No more
+messages
+list; use the required
+chatController
+. No more
+onSendPressed
+; use the
+onMessageSent
+callback. No more
+user
+; use
+currentUserId
+and the
+resolveUser
+function.
+Please consult the
+Migration Guide
+in our documentation for assistance. 🔄
+Future Roadmap
+Section titled “Future Roadmap”
+V2 provides a solid foundation for future development. Our immediate priorities include adding highly requested features:
+Reactions
+👍
+Replies
+↩️
+Audio Messages
+(as a separate package) 🎤
+We also plan to introduce packages for Video and Location messages. However, the builder pattern empowers you to implement and integrate any custom message type immediately.
+Get Started with v2!
+Section titled “Get Started with v2!”
+Flyer Chat v2 enables you to build performant, custom chat UIs more efficiently. Whether for real-time messaging, AI assistants, or support platforms, v2 offers the necessary flexibility.
+Read the Docs
+See the Example
+Find it on Pub.dev
+Help out on GitHub
+We are excited about the possibilities v2 offers and look forward to seeing your creations! 🎉
+
+--- Content from https://flyer.chat/docs/react-native/wip ---
+
+Work in Progress
+🚧 The React Native documentation is currently in progress. 🚧
+Edit page
+Last updated:
+Jul 15, 2025
